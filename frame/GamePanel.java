@@ -36,7 +36,6 @@ public class GamePanel extends JPanel {
         }
     }
 
-    @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
@@ -70,6 +69,15 @@ public class GamePanel extends JPanel {
        g.drawImage(
         ImageIO.read(new File("./images/perso.png")),
         6 * SCREEN_TILE_SIZE,
+        5 * SCREEN_TILE_SIZE,
+        SCREEN_TILE_SIZE,
+        SCREEN_TILE_SIZE,
+        this
+        );
+
+        g.drawImage(
+        ImageIO.read(new File("./images/iron.png")),
+        5 * SCREEN_TILE_SIZE,
         5 * SCREEN_TILE_SIZE,
         SCREEN_TILE_SIZE,
         SCREEN_TILE_SIZE,

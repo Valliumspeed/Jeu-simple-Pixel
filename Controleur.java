@@ -1,6 +1,6 @@
 public class Controleur {
     
-    public FrameJeu frame;
+    public Frame frame;
     public Metier metier;
     
     public Controleur() {
@@ -8,8 +8,8 @@ public class Controleur {
     }
 
     public void demarrerJeu() {
-        frame = new FrameJeu();
-        frame.setVisible(true);
+        this.frame = new Frame();
+        this.metier = new Metier();
     }
 
     public static void main(String[] args) {

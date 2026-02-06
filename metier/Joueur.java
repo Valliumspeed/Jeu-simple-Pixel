@@ -19,4 +19,19 @@ public class Joueur {
         this.y = y;
         this.damage = damage;
     }
+
+    public Joueur() {
+        this(0, 0, 0, 1); // Valeurs par défaut
+    }
+
+    public int getCurrentHP() {
+        return this.health; // Valeur temporaire, à remplacer par la logique réelle
+    }
+
+    public void reduceHP(int amount) {
+        this.health -= amount;
+        if (this.health < 0) {
+            this.health = 0; // Empêche les HP de devenir négatifs
+        }
+    }
 }

@@ -1,6 +1,6 @@
 public class Controleur {
     
-    public Frame frame;
+    public FrameJeu frame;
     public Metier metier;
     
     public Controleur() {
@@ -8,11 +8,16 @@ public class Controleur {
     }
 
     public void demarrerJeu() {
-        this.frame = new Frame();
+        this.frame = new FrameJeu(this);
         this.metier = new Metier();
     }
 
     public static void main(String[] args) {
         Controleur controleur = new Controleur();
+        controleur.frame.move();
+    }
+
+    public int getCurrentHP() {
+        return this.metier.getCurrentHP(); // Valeur temporaire, à remplacer par la logique réelle
     }
 }

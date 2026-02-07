@@ -17,19 +17,13 @@ public class UIPanel extends JPanel {
 
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
-        try {
-            drawUI(g); // couche 2
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
-    private void drawUI(Graphics g) throws Exception {
-        drawPlayerHealth(g);
+    private void drawUI(Graphics g, int health) throws Exception {
+        drawPlayerHealth(g, health);
     }
 
-    public void drawPlayerHealth(Graphics g) {
+    public void drawPlayerHealth(Graphics g,int hp) {
         /// HP Bar - centered bottom
         int barWidth = 100;
         int barHeight = 12;
@@ -37,7 +31,7 @@ public class UIPanel extends JPanel {
         int y = GamePanel.HEIGHT - 30;
         
         int maxHP = 100;
-        int currentHP = parent.getCurrentHP(); // méthode à implémenter dans FrameJeu
+        int currentHP = hp;
         int hpWidth = (int) ((currentHP / (float) maxHP) * barWidth);
         
         // Draw red background

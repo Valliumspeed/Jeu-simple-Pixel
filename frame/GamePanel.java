@@ -1,13 +1,16 @@
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+
+import metier.Ressources;
+
 import javax.imageio.ImageIO;
 
 import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Color;
+import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Set;
 
 public class GamePanel extends JLayeredPane {
 
@@ -41,24 +44,13 @@ public class GamePanel extends JLayeredPane {
         this.add(this.entityLayer, Integer.valueOf(1));
     }
 
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-
-        try {
-            this.drawBackground(g); 
-            this.drawEntities(g);   
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     // ================== COUCHES ==================
 
-    private void drawBackground(Graphics g) throws Exception {
+    public void drawBackground(Graphics g, String path) throws Exception {
         for (int x = 0; x < TILE_COUNT_X; x++) {
             for (int y = 0; y < TILE_COUNT_Y; y++) {
                 g.drawImage(
-                    ImageIO.read(new File("./images/herbe.png")),
+                    ImageIO.read(new File(path)),
                     x * SCREEN_TILE_SIZE,
                     y * SCREEN_TILE_SIZE,
                     SCREEN_TILE_SIZE,
@@ -69,15 +61,17 @@ public class GamePanel extends JLayeredPane {
         }
     }
 
-    private void drawEntities(Graphics g) throws Exception {
-        // Exemple : notre joueur au centre de l'écran
-        g.drawImage(
-        ImageIO.read(new File("./images/iron.png")),
-        5 * SCREEN_TILE_SIZE,
-        5 * SCREEN_TILE_SIZE,
-        SCREEN_TILE_SIZE,
-        SCREEN_TILE_SIZE,
-        this.entityLayer
-        );  
+    public void drawRessources(Graphics g, Set<Ressources> ressources) throws Exception {
+        for (Ressources ressource : ressources) {
+            BufferedImage image = ImageIO.read(new File("./images/" + ressource.getType().name() +"/" + ressource.getName() + ".png"));
+            g.drawImage(
+                image,
+                ressource.getX() * SCREEN_TILE_SIZE,
+                ressource.getY() * SCREEN_TILE_SIZE,
+                image.getWidth() * SCALE,
+                image.getHeight() * SCALE,
+                this.entityLayer
+            );
+        }
     }
 }

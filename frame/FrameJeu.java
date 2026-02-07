@@ -1,18 +1,22 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.util.Set;
 
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 
+import metier.Ressources;
+
 public class FrameJeu extends JFrame {
     
-    public Controleur controleur;
+    private Controleur controleur;
 
-    public JLayeredPane layeredPanel;
+    private JLayeredPane layeredPanel;
 
-    public GamePanel gamePanel;
-    public UIPanel uiPanel;
+    private PlayerPanel playerPanel;
+    private GamePanel gamePanel;
+    private UIPanel uiPanel;
 
     public FrameJeu(Controleur controleur) {
 
@@ -25,13 +29,16 @@ public class FrameJeu extends JFrame {
 
         this.layeredPanel = new JLayeredPane();
 
+        this.playerPanel = new PlayerPanel(this);
+        this.playerPanel.setBounds(GamePanel.SCREEN_TILE_SIZE * 6, GamePanel.SCREEN_TILE_SIZE * 5, GamePanel.SCREEN_TILE_SIZE, GamePanel.SCREEN_TILE_SIZE);
         this.gamePanel = new GamePanel(this);
         this.gamePanel.setBounds(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
         this.uiPanel = new UIPanel(this);
         this.uiPanel.setBounds(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
 
         this.layeredPanel.add(this.gamePanel  , Integer.valueOf(0));
-        this.layeredPanel.add(this.uiPanel, Integer.valueOf(1));
+        this.layeredPanel.add(this.playerPanel, Integer.valueOf(1));
+        this.layeredPanel.add(this.uiPanel, Integer.valueOf(2));
 
         this.layeredPanel.setPreferredSize(new Dimension(GamePanel.WIDTH, GamePanel.HEIGHT));
         this.layeredPanel.setBackground(Color.BLACK);
@@ -47,11 +54,38 @@ public class FrameJeu extends JFrame {
         return this.controleur.getCurrentHP(); // Valeur temporaire, à remplacer par la logique réelle
     }
 
-    public void drawPlayerHealth(Graphics g) {
-        this.uiPanel.drawPlayerHealth(g);
+    public void drawBackground(Graphics g, String path) {
+        try {
+            this.gamePanel.drawBackground(g, path);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } 
     }
 
-    public void move() {
-        this.gamePanel.setLocation(- GamePanel.SCREEN_TILE_SIZE,0);
+    public void drawRessources(Graphics g, Set<Ressources> ressources) {
+        try {
+            this.gamePanel.drawRessources(g, ressources);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } 
+    }
+
+        public void drawPlayer(Graphics g) {
+        try {
+            this.playerPanel.drawPlayer(g);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } 
+    }
+
+
+    public void drawPlayerHealth(Graphics g, int health) {
+        this.uiPanel.drawPlayerHealth(g, health);
+    }
+
+    public void movePlayer(int dx, int dy) {
+        this.playerPanel.setLocation(this.playerPanel.getX() + dx * GamePanel.SCREEN_TILE_SIZE, this.playerPanel.getY() + dy * GamePanel.SCREEN_TILE_SIZE);
+        this.playerPanel.repaint(); // Redessiner le joueur à sa nouvelle position
+        //play animation, check collisions, etc.
     }
 }

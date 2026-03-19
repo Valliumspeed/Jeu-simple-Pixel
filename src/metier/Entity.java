@@ -1,6 +1,6 @@
-package metier;
+package src.metier;
 
-public class Entities {
+public class Entity {
 
     protected int maxHealth;
     protected int health;
@@ -11,11 +11,11 @@ public class Entities {
     protected int damage;
     protected int attackSpeed;
 
-    protected Entities() {
+    protected Entity() {
         this(100,100, 0, 0, 0, 1); // Valeurs par défaut
     }
 
-    protected Entities(int maxHealth, int health, int x, int y, int damage, int attackSpeed) {
+    protected Entity(int maxHealth, int health, int x, int y, int damage, int attackSpeed) {
         this.maxHealth   = maxHealth;
         this.health      = health;
         this.x           = x;

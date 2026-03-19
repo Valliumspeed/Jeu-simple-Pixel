@@ -1,6 +1,6 @@
-package metier;
+package src.metier;
 
-public class Joueur extends Entities {
+public class Joueur extends Entity {
     private final static int MAX_PLAYER_HEALTH = 100;
 
     private int armor;

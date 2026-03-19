@@ -1,4 +1,4 @@
-package metier;
+package src.metier;
 
 import java.awt.Point;
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public class Jeu {
         this.ressources = new HashSet<Ressources>();
         this.occupied = new HashSet<Point>();
 
-        chargerRessources("map/test10x10.csv");
+        chargerRessources("src/metier/map/test10x10.csv");
     }
 
     public Set<Ressources> getRessources() {
@@ -46,14 +46,14 @@ public class Jeu {
 
         if (path == null || path.size() < 2) return;
 
-        Point next = path.get(1); // prochaine case
+        Point next = path.get(1); 
 
         this.player.setX(next.x);
         this.player.setY(next.y);
     }
 
     private boolean isInside(int x, int y) {
-        return x >= 0 && y >= 0 && x < 10 && y < 10; // adapte si besoin
+        return x >= 0 && y >= 0 && x < 10 && y < 10; 
     }
 
     private boolean isNextToTarget(int x, int y, int tx, int ty) {
@@ -75,7 +75,6 @@ public class Jeu {
         while (!queue.isEmpty()) {
             Node current = queue.poll();
 
-            // 🎯 Objectif : être à côté de la cible
             if (isNextToTarget(current.x, current.y, targetX, targetY)) {
                 return buildPath(current);
             }
@@ -144,7 +143,7 @@ public class Jeu {
                 if (parts.length >= 6) {
                     
                     String name = parts[0].trim();
-                    typeRessources type = typeRessources.valueOf(parts[1].trim());
+                    typeRessource type = typeRessource.valueOf(parts[1].trim());
                     int maxHealth = Integer.parseInt(parts[2].trim());
                     int health = Integer.parseInt(parts[3].trim());
                     int x = Integer.parseInt(parts[4].trim());

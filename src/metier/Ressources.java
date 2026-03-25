@@ -7,14 +7,14 @@ public class Ressources extends Entity {
     private int resAmount;       // Quantité de ressource
 
     public Ressources() {
-        super(100,100, 0, 0,  0, 1); // Valeurs par défaut
+        super(100,100, 0, 0,  0,    1.0); // Valeurs par défaut
         this.name = "Ressource"; // Nom de ressource par défaut
         this.type = typeRessource.Stone; // Type de ressource par défaut
         this.resAmount = 10; // Quantité de ressource par défaut
     }
 
     public Ressources(String name, typeRessource type, int maxHealth, int health, int x, int y, int resAmount) {
-        super(maxHealth, health, x, y, 0, 1);
+        super(maxHealth, health, x, y, 0, 1.0);
         this.name = name;
         this.type = type;
         this.resAmount = resAmount;
@@ -28,5 +28,5 @@ public class Ressources extends Entity {
 
     public String         getName     () { return this.name     ; }
     public int            getResAmount() { return this.resAmount; }
-    public typeRessource getType     () { return this.type     ; }
+    public typeRessource  getType     () { return this.type     ; }
 }

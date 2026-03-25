@@ -3,5 +3,5 @@ package src.metier;
 public enum typeRessource {
     Wood,
     Stone,
-    Enemie
+    Enemy
 }

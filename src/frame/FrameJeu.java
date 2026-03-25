@@ -27,19 +27,24 @@ public class FrameJeu extends JFrame {
         setTitle("Frame Jeu");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        //setResizable(false); // Rendre la fenêtre non changeable
+        setResizable(false); // La fenêtre ne dépasse jamais la taille visible de la map
 
         this.layeredPanel = new JLayeredPane();
 
+        int panelWidth = GamePanel.getPreferredWidth(this.ctrl.getMetier());
+        int panelHeight = GamePanel.getPreferredHeight(this.ctrl.getMetier());
+
         this.gamePanel = new GamePanel(this, this.ctrl.getMetier());
-        this.gamePanel.setBounds(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
+        this.gamePanel.setBounds(0, 0, panelWidth, panelHeight);
+        this.gamePanel.initialiserCamera();
+
         this.uiPanel = new UIPanel(this);
-        this.uiPanel.setBounds(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
+        this.uiPanel.setBounds(0, 0, panelWidth, panelHeight);
 
         this.layeredPanel.add(this.gamePanel  , Integer.valueOf(0));
         this.layeredPanel.add(this.uiPanel, Integer.valueOf(1));
 
-        this.layeredPanel.setPreferredSize(new Dimension(GamePanel.WIDTH, GamePanel.HEIGHT));
+        this.layeredPanel.setPreferredSize(new Dimension(panelWidth, panelHeight));
         this.layeredPanel.setBackground(Color.BLACK);
 
         setContentPane(this.layeredPanel);
